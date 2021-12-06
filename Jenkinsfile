@@ -16,14 +16,14 @@ pipeline{
             agent any
             steps {
               withSonarQubeEnv('Passportproject') {
-                sh 'java -version'
-                sh 'mvn clean package sonar:sonar'
+                 sh 'java -version'
+                 sh 'mvn clean package sonar:sonar'
               }
             }
           }
-    stage("Quality gate") {
+       stage("Quality gate") {
             steps {
-             waitForQualityGate abortPipeline: true
+               waitForQualityGate abortPipeline: true
             }
         }
    
