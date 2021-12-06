@@ -26,7 +26,27 @@ pipeline{
              waitForQualityGate abortPipeline: true
             }
         }
+   
+     stage('Deploy to artifactory'){
+        steps{
+        rtUpload(
+         serverId : 'Art-server',
+         spec :'''{
+           "files" :[
+           {
+           "pattern":"target/*.jar",
+           "target":"Art-dev-21.1"
+           }
+           ]
+         }''',
+         
+      )
+      }
+     }
+     
   }
+   
+  
         post {  
          always {  
              echo 'This will always run'  
